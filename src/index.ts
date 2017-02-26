@@ -40,8 +40,8 @@ app.get('/api/mainpage', async (req, res) => {
 })
 
 app.get('/api/relevantnews', async (req, res) => {
-    const method = req.param('method', 0);
-    const keywords = req.param('keywords', 0);
+    const method = req.param('method', "");
+    const keywords = JSON.parse(req.param('keywords', '[]'));
     const limit = parseInt(req.param('size', '10'));
 
     let result = await client.search({
@@ -52,7 +52,7 @@ app.get('/api/relevantnews', async (req, res) => {
         body: {
             query: {
                 match: {
-                    articlePhrases: keywords
+                    phrases: keywords
                 }
             }
         }
