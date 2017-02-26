@@ -7,7 +7,7 @@ import { result2send } from './util'
 const app = express();
 let client = new es.Client({
     host: 'localhost:9200',
-    log: 'trace'
+    log: 'info'
 });
 
 app.use(function(req, res, next) {
@@ -40,12 +40,9 @@ app.get('/api/mainpage', async (req, res) => {
 })
 
 app.get('/api/relevantnews', async (req, res) => {
-    const newsid = req.param('newsid', 0);
     const method = req.param('method', 0);
     const keywords = req.param('keywords', 0);
     const limit = parseInt(req.param('size', '10'));
-    // const result = await rp('http://www.google.com');
-    // const result = await rp(`localhost:9200?newsid=${newsid}&method=${method}`);
 
     let result = await client.search({
         index: 'newsx',
@@ -83,6 +80,6 @@ app.get('api/fullarticle', async (req, res) => {
 
 });
 
-app.listen(3000, ()=>{
-    console.log("listening on 3000!")
+app.listen(9201, ()=>{
+    console.log("listening on 9201!")
 })
