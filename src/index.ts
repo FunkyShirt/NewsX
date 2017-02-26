@@ -64,12 +64,16 @@ app.get('/api/relevantnews', async (req, res) => {
 
 app.get('api/fullarticle', async (req, res) => {
     const newsid = req.param('newsid', 0);
-    let result = await client.get({
+    let result = await client.getSource({
         index: 'newsx',
         type: 'article',
-        id: newsid
-    });
-    res.send(result.hits.hits._source);
+        id: newsid,
+        _source: true
+    });    
+        // index: 'newsx',
+        // type: 'article',
+        // id: newsid
+    res.send(result);
 
 });
 
