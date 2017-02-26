@@ -37,7 +37,7 @@ app.get('/api/relevantnews', async (req, res) => {
     const newsid = req.param('newsid', 0);
     const method = req.param('method', 0);
     const keywords = req.param('keywords', 0);
-    const limit = req.param('size', 10);
+    const limit = parseInt(req.param('size', '10'));
     // const result = await rp('http://www.google.com');
     // const result = await rp(`localhost:9200?newsid=${newsid}&method=${method}`);
 
